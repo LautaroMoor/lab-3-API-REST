@@ -1,51 +1,24 @@
 package ar.edu.utn.frbb.tup.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
+@Setter
 public class Materia {
 
     private int materiaId;
     private String nombre;
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getAnio() {
-        return anio;
-    }
-
-    public void setAnio(int anio) {
-        this.anio = anio;
-    }
-
-    public int getCuatrimestre() {
-        return cuatrimestre;
-    }
-
-    public void setCuatrimestre(int cuatrimestre) {
-        this.cuatrimestre = cuatrimestre;
-    }
-
-    public Profesor getProfesor() {
-        return profesor;
-    }
-
-    public void setProfesor(Profesor profesor) {
-        this.profesor = profesor;
-    }
-
-    public void setCorrelatividades(List<Materia> correlatividades) {
-        this.correlatividades = correlatividades;
-    }
-
     private int anio;
     private int cuatrimestre;
     private Profesor profesor;
-
     private List<Materia> correlatividades;
+    private int idDepartamento;
+    private int idCarrera;
 
     public Materia(){}
 
@@ -62,22 +35,6 @@ public class Materia {
     public void agregarCorrelatividad(Materia m){
         this.correlatividades.add(m);
 
-    }
-
-    public List<Materia> getCorrelatividades(){
-        return this.correlatividades;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public int getMateriaId() {
-        return materiaId;
-    }
-
-    public void setMateriaId(int materiaId) {
-        this.materiaId = materiaId;
     }
 
     @Override
