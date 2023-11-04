@@ -1,11 +1,17 @@
 package ar.edu.utn.frbb.tup.business.impl;
 
 import ar.edu.utn.frbb.tup.business.AlumnoService;
+import ar.edu.utn.frbb.tup.business.AsignaturaService;
+import ar.edu.utn.frbb.tup.business.ProfesorService;
 import ar.edu.utn.frbb.tup.model.*;
 import ar.edu.utn.frbb.tup.model.dto.AlumnoDto;
+import ar.edu.utn.frbb.tup.model.exception.AsignaturaInexistenteException;
 import ar.edu.utn.frbb.tup.persistence.AlumnoDao;
 import ar.edu.utn.frbb.tup.persistence.AlumnoDaoMemoryImpl;
+import ar.edu.utn.frbb.tup.persistence.CarreraDao;
+import ar.edu.utn.frbb.tup.persistence.MateriaDao;
 import ar.edu.utn.frbb.tup.persistence.exception.AlumnoNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,7 +20,12 @@ import java.util.List;
 public class AlumnoServiceImpl implements AlumnoService {
 
     private static final AlumnoDao alumnoDao = new AlumnoDaoMemoryImpl();
-    //private static final AsignaturaService asignaturaService = new AsignaturaServiceImpl();
+    private final AsignaturaService asignaturaService;
+    @Autowired
+    public AlumnoServiceImpl(AsignaturaService asignaturaService) {
+        this.asignaturaService = asignaturaService;
+    }
+
 
     /*
     @Override
@@ -41,6 +52,7 @@ public class AlumnoServiceImpl implements AlumnoService {
             a.setNombre(alumno.getNombre());
             a.setApellido(alumno.getApellido());
             a.setDni(alumno.getDni());
+            a.setAsignaturas(asignaturaService.getAll());
             alumnoDao.save(a);
         }catch (Exception e){
             e.getStackTrace();
@@ -84,5 +96,30 @@ public class AlumnoServiceImpl implements AlumnoService {
     @Override
     public List<Alumno> getAlumnos() throws AlumnoNotFoundException {
         return alumnoDao.getAll();
+    }
+
+    public Alumno modficarEAAsignaturaByAlumno(int idAlumno, int idAsignatura, int nuevaNota) throws AlumnoNotFoundException, AsignaturaInexistenteException {
+        Alumno alumno;
+        try {
+            alumno = alumnoDao.findById(idAlumno);
+
+            boolean asignaturaEncontrada = false;
+            for (Asignatura asignatura : alumno.getAsignaturas()) {
+                if (asignatura.getMateria().getMateriaId() == idAsignatura) {
+                    asignatura.setNota(nuevaNota);
+                    asignatura.asignarEstadoMateria((long) nuevaNota); // Actualizar estado según la nota
+                    asignaturaEncontrada = true;
+                    break;
+                }
+            }
+
+            if (asignaturaEncontrada) {
+                return alumnoDao.save(alumno);
+            } else {
+                throw new AsignaturaInexistenteException("Asignatura no encontrada con ID: " + idAsignatura);
+            }
+        }catch (Exception e){
+            throw e;
+        }
     }
 }

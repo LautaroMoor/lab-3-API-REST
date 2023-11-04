@@ -1,11 +1,14 @@
 package ar.edu.utn.frbb.tup.business.impl;
 
+import ar.edu.utn.frbb.tup.business.AsignaturaService;
 import ar.edu.utn.frbb.tup.business.MateriaService;
 import ar.edu.utn.frbb.tup.business.ProfesorService;
+import ar.edu.utn.frbb.tup.model.Asignatura;
 import ar.edu.utn.frbb.tup.model.Carrera;
 import ar.edu.utn.frbb.tup.model.Materia;
 import ar.edu.utn.frbb.tup.model.Profesor;
 import ar.edu.utn.frbb.tup.model.dto.MateriaDto;
+import ar.edu.utn.frbb.tup.persistence.AsignaturaDao;
 import ar.edu.utn.frbb.tup.persistence.CarreraDao;
 import ar.edu.utn.frbb.tup.persistence.MateriaDao;
 import ar.edu.utn.frbb.tup.persistence.exception.BadOrderByException;
@@ -21,12 +24,14 @@ public class MateriaServiceImpl implements MateriaService {
     private final MateriaDao dao;
     private final ProfesorService profesorService;
     private final CarreraDao carreraDao;
+    private final AsignaturaService asignaturaService;
 
     @Autowired
-    public MateriaServiceImpl(MateriaDao dao, ProfesorService profesorService, CarreraDao carreraDao) {
+    public MateriaServiceImpl(MateriaDao dao, ProfesorService profesorService, CarreraDao carreraDao, AsignaturaService asignaturaService) {
         this.dao = dao;
         this.profesorService = profesorService;
         this.carreraDao = carreraDao;
+        this.asignaturaService = asignaturaService;
     }
 
     @Override
@@ -55,6 +60,7 @@ public class MateriaServiceImpl implements MateriaService {
             }
             //========================
 
+            asignaturaService.crearAsignatura(m);
             dao.save(m);
         }catch (Exception e){
             e.getStackTrace();
