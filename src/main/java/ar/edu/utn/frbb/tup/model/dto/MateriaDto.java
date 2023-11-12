@@ -17,4 +17,8 @@ public class MateriaDto {
     private int cuatrimestre;
     private long profesorId;
     private int carreraId;
+
+    public MateriaDto() {
+
+    }
 }

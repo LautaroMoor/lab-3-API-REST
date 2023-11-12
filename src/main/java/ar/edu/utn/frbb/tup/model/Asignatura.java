@@ -15,7 +15,6 @@ public class Asignatura {
     public Asignatura() {
     }
     public Asignatura(Materia materia) {
-        Random random = new Random();
         this.materia = materia;
         this.estado = EstadoAsignatura.NO_CURSADA;
     }

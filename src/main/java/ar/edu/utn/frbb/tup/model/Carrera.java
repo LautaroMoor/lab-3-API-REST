@@ -20,6 +20,13 @@ public class Carrera {
         this.idDepartamento = idDepartamento;
     }
 
+    public Carrera(String nombre, int cantidadCuatrimestres, int idDepartamento, int id) {
+        this.id = id;
+        this.nombre = nombre;
+        this.cantidadCuatrimestres = cantidadCuatrimestres;
+        this.idDepartamento = idDepartamento;
+    }
+
     public Carrera() {
 
     }

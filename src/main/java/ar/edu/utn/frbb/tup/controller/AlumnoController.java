@@ -16,28 +16,28 @@ public class AlumnoController {
     @Autowired
     private AlumnoService alumnoService;
 
-    @GetMapping
+    @GetMapping // Test hecho
     public List<Alumno> getAlumnos () throws AlumnoNotFoundException {
         return alumnoService.getAlumnos();
     }
 
-    @PostMapping
+    @PostMapping // Test hecho
     public Alumno crearAlumno(@RequestBody AlumnoDto alumnoDto) {
         return alumnoService.crearAlumno(alumnoDto);
     }
 
-    @PutMapping("/{idAlumno}")
+    @PutMapping("/{idAlumno}") // Test hecho
     public Alumno modificarAlumnoById(@PathVariable Integer idAlumno,
                                       @RequestBody AlumnoDto alumno) throws AlumnoNotFoundException {
         return alumnoService.modificarAlumnoById(idAlumno,alumno);
     }
 
-    @DeleteMapping("/{idAlumno}")
+    @DeleteMapping("/{idAlumno}") // Test hecho
     public Alumno borrarAlumnoById(@PathVariable Integer idAlumno) throws AlumnoNotFoundException {
         return alumnoService.borrarAlumnoById(idAlumno);
     }
 
-    @PutMapping("/{idAlumno}/asignatura/{idAsignatura}")
+    @PutMapping("/{idAlumno}/asignatura/{idAsignatura}") //FALTA HACER ESTE
     public Alumno modficarEAAsignaturaByAlumno(@PathVariable Integer idAlumno,
                                                  @PathVariable Integer idAsignatura,
                                                  @RequestParam Integer nota) throws AlumnoNotFoundException, AsignaturaInexistenteException {

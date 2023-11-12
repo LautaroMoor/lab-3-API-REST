@@ -1,8 +1,7 @@
 package ar.edu.utn.frbb.tup.service;
 
 import ar.edu.utn.frbb.tup.App;
-import ar.edu.utn.frbb.tup.business.MateriaService;
-import ar.edu.utn.frbb.tup.business.ProfesorService;
+import ar.edu.utn.frbb.tup.business.*;
 import ar.edu.utn.frbb.tup.business.impl.MateriaServiceImpl;
 import ar.edu.utn.frbb.tup.model.Carrera;
 import ar.edu.utn.frbb.tup.model.Materia;
@@ -22,6 +21,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -41,29 +41,39 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
 public class MateriaServiceTest {
     @Mock
     private MateriaDao dao;
+
+    @Mock
+    private MateriaServiceImpl materiaServiceImpl;
+
+    @Mock
     private ProfesorService profesorService;
-    private CarreraDao carreraDao;
+
+    @Mock
+    private AsignaturaService asignaturaService;
+
+    @Mock
+    private AlumnoService alumnoService;
+
+    @Mock
+    private CarreraService carreraService;
+
     @InjectMocks
-    private MateriaService materiaService;
+    private MateriaServiceImpl materiaService;
+
 
     @BeforeEach
-    public void setUp(){
-        Materia materia1 = new Materia("Lautaro",1,2,new Profesor("Luciano","Salotto","Licenciado"));
-        Materia materia2 = new Materia("Gabriel",1,2,new Profesor("Luciano","Salotto","Licenciado"));
-        dao.save(materia1);
-        dao.save(materia2);
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    public void getAll(){
+    public void testCrearMateria() throws Exception {
     }
-
 }

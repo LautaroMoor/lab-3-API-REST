@@ -17,38 +17,38 @@ public class MateriaController {
     @Autowired
     private MateriaService materiaService;
 
-    @GetMapping("/materia/getAll")
+    @GetMapping("/materia/getAll") //Tiene test
     public List<Materia> getMaterias() throws MateriaNotFoundException {
         return materiaService.getAllMaterias();
     }
 
-    @GetMapping("/materia")
+    @GetMapping("/materia") //Tiene test
     public List<Materia> getMateriasByNombre(@RequestParam("nombre") String nombre) throws MateriaNotFoundException {
         return materiaService.getMateriasByNombre(nombre);
     }
 
-    @GetMapping("/materias")
+    @GetMapping("/materias") //Tiene test
     public List<Materia> getMateriasOrderBy(@RequestParam("order") String order) throws MateriaNotFoundException, BadOrderByException {
         return materiaService.getMateriasOrderBy(order);
     }
 
-    @PostMapping("/materia")
+    @PostMapping("/materia") //Tiene test
     public Materia crearMateria(@RequestBody MateriaDto materiaDto) throws Exception {
         return materiaService.crearMateria(materiaDto);
     }
 
-    @GetMapping("/materia/{idMateria}")
+    @GetMapping("/materia/{idMateria}") //Tiene test
     public Materia getMateriaById(@PathVariable Integer idMateria) throws MateriaNotFoundException {
         return materiaService.getMateriaById(idMateria);
     }
 
-    @PutMapping("/materia/{idMateria}")
+    @PutMapping("/materia/{idMateria}") //Tiene test
     public Materia modificarMateriaById(@PathVariable Integer idMateria,
                                         @RequestBody MateriaDto materiaDto) throws MateriaNotFoundException, ProfesorNotFoundException {
         return materiaService.modificarMateriaById(idMateria,materiaDto);
     }
 
-    @DeleteMapping("/materia/{idMateria}")
+    @DeleteMapping("/materia/{idMateria}") //Tiene test
     public Materia borrarMateriaById(@PathVariable Integer idMateria) throws MateriaNotFoundException {
         return materiaService.borrarMateriaById(idMateria);
     }
