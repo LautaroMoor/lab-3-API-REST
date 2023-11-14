@@ -109,7 +109,7 @@ public class MateriaServiceImpl implements MateriaService {
         Materia m = null;
         try{
             m = dao.findById(idMateria);
-            if (m.getMateriaId() == 0){
+            if (m == null || m.getMateriaId() == 0){
                 throw new MateriaNotFoundException("Materia no encontrada");
             }
             dao.deleteById(m.getMateriaId());

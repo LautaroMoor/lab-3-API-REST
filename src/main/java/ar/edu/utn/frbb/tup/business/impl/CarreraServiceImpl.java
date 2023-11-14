@@ -68,7 +68,7 @@ public class CarreraServiceImpl implements CarreraService {
         Carrera c = null;
         try{
             c = dao.findById(idCarrera);
-            if (c.getId() == 0){
+            if (c == null || c.getId() == 0){
                 throw new CarreraNotFoundException("Carrera no encontrada");
             }
             dao.deleteById(c.getId());
